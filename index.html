@@ -1,0 +1,524 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="" />
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;1,6..72,400&display=swap" rel="stylesheet" />
+<script src="./image-slot.js"></script>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  body { margin: 0; background: #f4f6f8; font-family: 'Manrope', system-ui, sans-serif; -webkit-font-smoothing: antialiased; }
+  a { color: #1b64c8; text-decoration: none; }
+  a:hover { color: #12447f; }
+  summary { cursor: pointer; }
+  @keyframes bubbleIn { from { opacity: 0; transform: scale(.94) translateY(-8px); } to { opacity: 1; transform: none; } }
+  @keyframes faqIn { from { opacity: 0; transform: translateY(-6px); } to { opacity: 1; transform: none; } }
+  @keyframes pulseRing { 0% { box-shadow: 0 0 0 0 rgba(27,100,200,.35); } 70% { box-shadow: 0 0 0 14px rgba(27,100,200,0); } 100% { box-shadow: 0 0 0 0 rgba(27,100,200,0); } }
+</style>
+</helmet>
+
+<div style="width: 100%; max-width: 100%; background: #f4f6f8; color: #0f1b2b; overflow-x: hidden;">
+
+  <template id="__bundler_thumbnail"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120"><rect width="120" height="120" fill="#1b64c8"/><text x="60" y="76" font-family="Manrope, sans-serif" font-size="52" font-weight="800" fill="#fff" text-anchor="middle">MK</text></svg></template>
+
+  <header data-header="1" style="position: {{ headerPos }}; top: 0; left: 0; right: 0; z-index: 50; background: rgba(255,255,255,.92); backdrop-filter: blur(10px); border-bottom: 1px solid #e4e9ef;">
+    <div style="max-width: 1160px; margin: 0 auto; padding-top: {{ headerPadTop }}; padding-bottom: 12px; padding-left: clamp(14px, 4vw, 24px); padding-right: clamp(14px, 4vw, 24px); display: flex; align-items: center; gap: clamp(10px, 2vw, 24px); flex-wrap: {{ headerWrap }};">
+      <div style="display: flex; align-items: center; gap: 10px; margin-right: auto; min-width: 0;">
+        <div style="width: 34px; height: 34px; border-radius: 9px; background: linear-gradient(160deg,#1b64c8,#0e3f88); display: grid; place-items: center; color: #fff; font-weight: 800; font-size: 15px; letter-spacing: -.02em;">M</div>
+        <div style="line-height: 1.15;">
+          <div style="font-weight: 800; font-size: 16px; letter-spacing: -.02em; white-space: nowrap;">{{ clinicName }}</div>
+          <div style="font-size: 11px; color: #6b7c92; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; white-space: nowrap;">Kaluđerica · Beograd</div>
+        </div>
+      </div>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <nav style="display: flex; gap: 22px; align-items: center; font-size: 14px; font-weight: 600; color: #435469; flex-wrap: wrap;">
+        <a href="#poseta" onClick="{{ navTo.poseta }}" style="color: #435469; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .22s ease, border-color .22s ease;" style-hover="color: #1b64c8; border-color: #1b64c8;">Prva poseta</a>
+        <a href="#o-mirku" onClick="{{ navTo.o_mirku }}" style="color: #435469; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .22s ease, border-color .22s ease;" style-hover="color: #1b64c8; border-color: #1b64c8;">O Mirku</a>
+        <a href="#iskustva" onClick="{{ navTo.iskustva }}" style="color: #435469; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .22s ease, border-color .22s ease;" style-hover="color: #1b64c8; border-color: #1b64c8;">Iskustva</a>
+        <a href="#pitanja" onClick="{{ navTo.pitanja }}" style="color: #435469; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .22s ease, border-color .22s ease;" style-hover="color: #1b64c8; border-color: #1b64c8;">Česta pitanja</a>
+        <a href="#kontakt" onClick="{{ navTo.kontakt }}" style="color: #435469; padding: 5px 0; border-bottom: 2px solid transparent; transition: color .22s ease, border-color .22s ease;" style-hover="color: #1b64c8; border-color: #1b64c8;">Kontakt</a>
+      </nav>
+      </sc-if>
+      <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 8px; background: #1b64c8; color: #fff; padding: 11px 18px; border-radius: 10px; font-weight: 700; font-size: 14px; box-shadow: 0 6px 18px rgba(27,100,200,.25); transition: background .22s ease, box-shadow .25s ease, transform .18s cubic-bezier(.2,.7,.3,1);" style-hover="background: #12508f; box-shadow: 0 10px 24px rgba(27,100,200,.38); transform: translateY(-2px);" style-active="transform: translateY(0) scale(.97); box-shadow: 0 4px 12px rgba(27,100,200,.3);">
+        <span style="font-size: 15px;">☎</span><span>{{ phone }}</span>
+      </a>
+      </sc-if>
+      <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <button onClick="{{ toggleMenu }}" aria-label="Meni" style="display: inline-flex; flex-direction: column; justify-content: center; gap: 5px; width: 44px; height: 44px; flex: none; padding: 0 11px; background: #f1f5fa; border: 1px solid #dde6f1; border-radius: 11px; cursor: pointer; transition: background .2s ease;" style-active="background: #e2ebf7;">
+          <span style="display: block; height: 2px; border-radius: 2px; background: #14243a;"></span>
+          <span style="display: block; height: 2px; border-radius: 2px; background: #14243a;"></span>
+          <span style="display: block; height: 2px; border-radius: 2px; background: #14243a;"></span>
+        </button>
+      </sc-if>
+    </div>
+    <sc-if value="{{ menuOpen }}" hint-placeholder-val="{{ false }}">
+      <div onClick="{{ closeMenu }}" style="position: fixed; inset: 0; z-index: 1; background: rgba(10,25,48,.18);"></div>
+      <div style="position: absolute; top: 100%; right: clamp(12px, 4vw, 22px); z-index: 2; margin-top: 10px; width: min(258px, calc(100vw - 32px)); background: #fff; border: 1px solid #e2eaf4; border-radius: 18px; padding: 8px; box-shadow: 0 22px 48px rgba(15,40,80,.22); transform-origin: top right; animation: bubbleIn .26s cubic-bezier(.2,.8,.3,1) both;">
+        <div style="position: absolute; top: -7px; right: 17px; width: 14px; height: 14px; background: #fff; border-left: 1px solid #e2eaf4; border-top: 1px solid #e2eaf4; transform: rotate(45deg); border-radius: 3px 0 0 0;"></div>
+        <nav style="display: flex; flex-direction: column; position: relative;">
+          <sc-for list="{{ menuItems }}" as="m" hint-placeholder-count="5">
+            <button onClick="{{ m.go }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; width: 100%; min-height: 48px; padding: 0 14px; background: none; border: 0; border-radius: 12px; cursor: pointer; font-family: inherit; font-size: 15.5px; font-weight: 700; color: #14243a; text-align: left; transition: background .18s ease, color .18s ease;" style-hover="background: #f3f7fc; color: #1b64c8;" style-active="background: #e7eff9;">
+              <span>{{ m.label }}</span>
+              <span style="color: #9fb2c9; font-size: 15px;">→</span>
+            </button>
+          </sc-for>
+        </nav>
+      </div>
+    </sc-if>
+  </header>
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}"><div style="height: 85px;"></div></sc-if>
+
+  <section style="position: relative; background: linear-gradient(180deg,#eaf1fa 0%, #f4f6f8 100%);">
+    <div style="max-width: 1160px; margin: 0 auto; padding: clamp(38px, 7vw, 64px) clamp(16px, 4vw, 24px) 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(34px, 5vw, 48px); align-items: center;">
+      <div style="min-width: 0; text-align: {{ ta }};">
+        <div style="display: inline-flex; align-items: center; gap: 8px; background: #fff; border: 1px solid #dbe4ef; color: #1b64c8; padding: 7px 14px; border-radius: 999px; font-size: 12.5px; font-weight: 700; letter-spacing: .02em; margin-bottom: 22px;">
+          <span style="width: 7px; height: 7px; border-radius: 50%; background: #2aa46a; display: inline-block;"></span>
+          40 godina prakse · fizioterapeut
+        </div>
+        <h1 style="margin: 0 0 18px; font-size: clamp(34px, 5.2vw, 58px); line-height: 1.04; letter-spacing: -.035em; font-weight: 800; color: #0c1728; text-wrap: balance;">
+          Vratite se svom telu<br /><span style="font-family: 'Newsreader', serif; font-weight: 400; font-style: italic; letter-spacing: -.01em;">bez bola u leđima</span>
+        </h1>
+        <p style="margin: 0 0 30px; font-size: clamp(16px, 1.4vw, 18.5px); line-height: 1.65; color: #4b5c72; max-width: 46ch; margin: {{ mx }}; margin-bottom: 30px; text-wrap: pretty;">
+          Mirko četiri decenije pomaže ljudima sa bolom u leđima i vratu — od kancelarijskih tegoba do ozbiljnih sportskih povreda. Pregled počinje razgovorom, a terapija se prilagođava vama.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: 14px; align-items: center; justify-content: {{ fx }};">
+          <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 12px; background: #1b64c8; color: #fff; padding: 17px 26px; border-radius: 13px; font-weight: 800; font-size: 17px; box-shadow: 0 14px 30px rgba(27,100,200,.28); animation: pulseRing 2.6s infinite; transition: background .22s ease, transform .18s cubic-bezier(.2,.7,.3,1);" style-hover="background: #12508f; transform: translateY(-3px);" style-active="transform: translateY(0) scale(.97);">
+            <span style="font-size: 19px;">☎</span> Pozovite {{ phone }}
+          </a>
+          <div style="font-size: 13.5px; color: #62738a; font-weight: 600; line-height: 1.5;">Radnim danima i subotom<br />9–17h · odgovaramo lično</div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 10px 26px; margin-top: 34px; padding-top: 26px; border-top: 1px solid #dde5ee; justify-content: {{ fx }};">
+          <div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #33445a;"><span style="color: #2aa46a; font-weight: 800;">✓</span> Bol u leđima i vratu</div>
+          <div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #33445a;"><span style="color: #2aa46a; font-weight: 800;">✓</span> Sportske povrede</div>
+          <div style="display: flex; align-items: center; gap: 9px; font-size: 14px; font-weight: 600; color: #33445a;"><span style="color: #2aa46a; font-weight: 800;">✓</span> Bez čekanja na listu</div>
+        </div>
+      </div>
+      <div style="min-width: 0; position: relative;">
+        <div style="position: relative; border-radius: 22px; overflow: hidden; box-shadow: 0 30px 70px rgba(15,40,80,.16); background: #dde6f1;">
+          <image-slot id="hero-mirko" shape="rect" src="./uploads/hero-mirko.png" fit="cover" style="width: 100%; height: 100%; aspect-ratio: 4/5;" placeholder="Fotografija Mirka u ordinaciji (portret)"></image-slot>
+        </div>
+        <div style="position: absolute; bottom: -22px; left: 8px; background: #fff; border: 1px solid #e6ecf3; border-radius: 16px; padding: 16px 20px; box-shadow: 0 18px 40px rgba(15,40,80,.12); display: flex; gap: 14px; align-items: center;">
+          <div style="font-size: 30px; font-weight: 800; color: #1b64c8; letter-spacing: -.04em;">40</div>
+          <div style="font-size: 12.5px; font-weight: 700; color: #4b5c72; line-height: 1.35;">godina radnog<br />iskustva</div>
+        </div>
+      </div>
+    </div>
+    <div style="height: 72px;"></div>
+  </section>
+
+  <section style="max-width: 1160px; margin: -36px auto 0; padding: 0 clamp(16px, 4vw, 24px); position: relative; z-index: 5;">
+    <div style="background: #0e2a52; border-radius: 20px; padding: clamp(22px, 4vw, 26px) clamp(22px, 4vw, 30px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 20px; box-shadow: 0 24px 50px rgba(14,42,82,.25); text-align: {{ ta }};">
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8fb4e6; margin-bottom: 7px;">Telefon</div>
+        <a href="{{ telHref }}" style="font-size: 21px; font-weight: 800; color: #fff; letter-spacing: -.02em;">{{ phone }}</a>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8fb4e6; margin-bottom: 7px;">Adresa</div>
+        <div style="font-size: 15.5px; font-weight: 600; color: #eaf1fb; line-height: 1.4;">Karađorđeva 6<br />Kaluđerica, Beograd</div>
+      </div>
+      <div>
+        <div style="font-size: 11px; font-weight: 700; letter-spacing: .12em; text-transform: uppercase; color: #8fb4e6; margin-bottom: 7px;">Radno vreme</div>
+        <div style="font-size: 15.5px; font-weight: 600; color: #eaf1fb; line-height: 1.4;">Pon–Sub 9:00–17:00<br /><span style="color: #a9c3e6;">Nedeljom zatvoreno</span></div>
+      </div>
+      <div style="display: flex; align-items: center;">
+        <a href="{{ telHref }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 10px; width: 100%; background: #fff; color: #0e2a52; padding: 15px 20px; border-radius: 12px; font-weight: 800; font-size: 15.5px; transition: background .22s ease, transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease;" style-hover="background: #eaf1fa; transform: translateY(-2px); box-shadow: 0 12px 26px rgba(0,0,0,.22);" style-active="transform: translateY(0) scale(.97);">☎ Zakaži termin</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="poseta" style="max-width: 1160px; margin: 0 auto; padding: clamp(52px, 8vw, 86px) clamp(16px, 4vw, 24px) 0;">
+    <div style="max-width: 900px; margin: 0 auto 40px; text-align: {{ ta }};">
+      <div style="font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1b64c8; margin-bottom: 12px;">Kako izgleda prva poseta</div>
+      <h2 style="margin: 0 0 14px; font-size: clamp(27px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -.03em; font-weight: 800; white-space: {{ headingWrap }}; font-size: clamp(26px, 3.2vw, 40px);">Bez iznenađenja — znate šta vas čeka</h2>
+      <p style="margin: 0; font-size: 17px; line-height: 1.65; color: #4b5c72; text-wrap: pretty;">Prva poseta je pre svega razgovor i pregled. Ništa se ne radi na silu i sve se objašnjava unapred.</p>
+    </div>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 6px 18px; box-shadow: 0 2px 10px rgba(15,40,80,.04);">
+      <div style="display: grid; grid-template-columns: 28px 1fr; column-gap: 14px; padding: 18px 0; border-bottom: 1px solid #eef2f7;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: #1b64c8; color: #fff; display: grid; place-items: center; font-weight: 800; font-size: 13px;">1</div>
+        <div style="min-width: 0;">
+          <h3 style="margin: 3px 0 6px; font-size: 16.5px; font-weight: 800; letter-spacing: -.02em;">Razgovor</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #566a82;">Kada je bol počeo, šta ga pogoršava, čime se bavite. Donesite snimke i nalaze ako ih imate.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 28px 1fr; column-gap: 14px; padding: 18px 0; border-bottom: 1px solid #eef2f7;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 13px;">2</div>
+        <div style="min-width: 0;">
+          <h3 style="margin: 3px 0 6px; font-size: 16.5px; font-weight: 800; letter-spacing: -.02em;">Pregled</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #566a82;">Provera pokretljivosti, držanja i osetljivih mesta. Mirko objasni šta je našao, običnim jezikom.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 28px 1fr; column-gap: 14px; padding: 18px 0; border-bottom: 1px solid #eef2f7;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 13px;">3</div>
+        <div style="min-width: 0;">
+          <h3 style="margin: 3px 0 6px; font-size: 16.5px; font-weight: 800; letter-spacing: -.02em;">Terapija</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #566a82;">Ako je bezbedno, prva terapija je odmah — uz jasan plan koliko poseta se očekuje.</p>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: 28px 1fr; column-gap: 14px; padding: 18px 0;">
+        <div style="width: 28px; height: 28px; border-radius: 50%; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 13px;">4</div>
+        <div style="min-width: 0;">
+          <h3 style="margin: 3px 0 6px; font-size: 16.5px; font-weight: 800; letter-spacing: -.02em;">Kod kuće</h3>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.6; color: #566a82;">Par vežbi i saveta za sedenje, spavanje i podizanje tereta — da rezultat ostane.</p>
+        </div>
+      </div>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 16px;">
+      <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 28px; text-align: {{ ta }}; box-shadow: 0 2px 10px rgba(15,40,80,.04); transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,40,80,.13); border-color: #cfdcec;">
+        <div style="width: 40px; height: 40px; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 16px; margin: {{ mx }}; margin-bottom: 18px;">1</div>
+        <h3 style="margin: 0 0 9px; font-size: 18.5px; font-weight: 800; letter-spacing: -.02em;">Razgovor</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566a82;">Kada je bol počeo, šta ga pogoršava, čime se bavite. Donesite snimke i nalaze ako ih imate.</p>
+      </div>
+      <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 28px; text-align: {{ ta }}; box-shadow: 0 2px 10px rgba(15,40,80,.04); transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,40,80,.13); border-color: #cfdcec;">
+        <div style="width: 40px; height: 40px; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 16px; margin: {{ mx }}; margin-bottom: 18px;">2</div>
+        <h3 style="margin: 0 0 9px; font-size: 18.5px; font-weight: 800; letter-spacing: -.02em;">Pregled</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566a82;">Provera pokretljivosti, držanja i osetljivih mesta. Mirko objasni šta je našao, običnim jezikom.</p>
+      </div>
+      <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 28px; text-align: {{ ta }}; box-shadow: 0 2px 10px rgba(15,40,80,.04); transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,40,80,.13); border-color: #cfdcec;">
+        <div style="width: 40px; height: 40px; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 16px; margin: {{ mx }}; margin-bottom: 18px;">3</div>
+        <h3 style="margin: 0 0 9px; font-size: 18.5px; font-weight: 800; letter-spacing: -.02em;">Terapija</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566a82;">Ako je bezbedno, prva terapija je odmah — uz jasan plan koliko poseta se očekuje.</p>
+      </div>
+      <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 28px; text-align: {{ ta }}; box-shadow: 0 2px 10px rgba(15,40,80,.04); transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,40,80,.13); border-color: #cfdcec;">
+        <div style="width: 40px; height: 40px; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 16px; margin: {{ mx }}; margin-bottom: 18px;">4</div>
+        <h3 style="margin: 0 0 9px; font-size: 18.5px; font-weight: 800; letter-spacing: -.02em;">Kod kuće</h3>
+        <p style="margin: 0; font-size: 15px; line-height: 1.6; color: #566a82;">Par vežbi i saveta za sedenje, spavanje i podizanje tereta — da rezultat ostane.</p>
+      </div>
+    </div>
+    </sc-if>
+  </section>
+
+  <section id="o-mirku" style="max-width: 1160px; margin: 0 auto; padding: clamp(52px, 8vw, 86px) clamp(16px, 4vw, 24px) 0;">
+    <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 290px), 1fr)); box-shadow: 0 8px 30px rgba(15,40,80,.06);">
+      <div style="min-width: 0; min-height: 340px; background: #e7edf4;">
+        <image-slot id="mirko-portret" shape="rect" src="./uploads/hf_20260914_115554_796b2d40-dbdb-4451-b4f7-7f78f757e0a1.png" style="width: 100%; height: 100%; min-height: 340px;" placeholder="Mirko na radu / u ordinaciji"></image-slot>
+      </div>
+      <div style="padding: clamp(28px, 4vw, 52px); min-width: 0; text-align: {{ ta }};">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1b64c8; margin-bottom: 12px;">O Mirku</div>
+        <h2 style="margin: 0 0 8px; font-size: clamp(25px, 3vw, 34px); line-height: 1.15; letter-spacing: -.03em; font-weight: 800;">Četiri decenije rada sa ljudima u bolu</h2>
+        <p style="margin: 0 0 16px; font-size: 14.5px; font-weight: 700; color: #1b64c8;">Fizioterapeut · kiropraktička terapija</p>
+        <p style="margin: 0 0 16px; font-size: 16.5px; line-height: 1.7; color: #4b5c72; text-wrap: pretty;">Mirko je fizioterapeut po struci, sa 40 godina radnog iskustva. Kroz njegove ruke prošli su i sportisti sa ozbiljnim povredama i ljudi koji su godinama trpeli bol u leđima misleći da je to normalno.</p>
+        <p style="margin: 0 0 26px; font-size: 16.5px; line-height: 1.7; color: #4b5c72; text-wrap: pretty;">Pristup je jednostavan: pažljiv pregled, iskrena procena i terapija bez preterivanja. Ako nešto nije za njega, reći će vam i uputiti dalje.</p>
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; margin-top: 24px; padding-top: 20px; border-top: 1px solid #e6ecf3;">
+          <div style="text-align: center;">
+            <div style="font-size: 24px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">40</div>
+            <div style="font-size: 11.5px; font-weight: 700; color: #6b7c92; margin-top: 6px; line-height: 1.35;">godina<br />iskustva</div>
+          </div>
+          <div style="text-align: center; border-left: 1px solid #e6ecf3; border-right: 1px solid #e6ecf3;">
+            <div style="font-size: 24px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">◆</div>
+            <div style="font-size: 11.5px; font-weight: 700; color: #6b7c92; margin-top: 6px; line-height: 1.35;">sportske<br />povrede</div>
+          </div>
+          <div style="text-align: center;">
+            <div style="font-size: 24px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">6/7</div>
+            <div style="font-size: 11.5px; font-weight: 700; color: #6b7c92; margin-top: 6px; line-height: 1.35;">dana<br />9–17h</div>
+          </div>
+        </div>
+        </sc-if>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 100px), 1fr)); grid-template-columns: {{ statCols }}; gap: 1px; margin-top: 28px; background: #e2eaf4; border: 1px solid #e2eaf4; border-radius: 16px; overflow: hidden; text-align: left;">
+          <div style="padding: 18px 20px; background: #f5f8fc;">
+            <div style="font-size: 30px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">40</div>
+            <div style="font-size: 13.5px; font-weight: 800; color: #14243a; margin-top: 8px;">godina prakse</div>
+            <div style="font-size: 12.5px; color: #6b7c92; font-weight: 600; margin-top: 2px;">fizioterapeut</div>
+          </div>
+          <div style="padding: 18px 20px; background: #f5f8fc;">
+            <div style="font-size: 30px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">◆</div>
+            <div style="font-size: 13.5px; font-weight: 800; color: #14243a; margin-top: 8px;">Sportisti</div>
+            <div style="font-size: 12.5px; color: #6b7c92; font-weight: 600; margin-top: 2px;">rad sa povredama</div>
+          </div>
+          <div style="padding: 18px 20px; background: #f5f8fc;">
+            <div style="font-size: 30px; font-weight: 800; letter-spacing: -.04em; color: #1b64c8; line-height: 1;">6/7</div>
+            <div style="font-size: 13.5px; font-weight: 800; color: #14243a; margin-top: 8px;">dana u nedelji</div>
+            <div style="font-size: 12.5px; color: #6b7c92; font-weight: 600; margin-top: 2px;">pon–sub, 9–17h</div>
+          </div>
+        </div>
+        </sc-if>
+      </div>
+    </div>
+  </section>
+
+  <sc-if value="{{ showReviews }}" hint-placeholder-val="{{ true }}">
+  <section id="iskustva" style="max-width: 1160px; margin: 0 auto; padding: clamp(52px, 8vw, 86px) clamp(16px, 4vw, 24px) 0;">
+    <div style="display: flex; justify-content: {{ fx }}; align-items: flex-end; gap: 24px; flex-wrap: wrap; margin-bottom: 36px;">
+      <div style="max-width: 560px; text-align: {{ ta }};">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1b64c8; margin-bottom: 12px;">Iskustva pacijenata</div>
+        <h2 style="margin: 0; font-size: clamp(27px, 3.4vw, 40px); line-height: 1.12; letter-spacing: -.03em; font-weight: 800;">Šta kažu ljudi posle terapije</h2>
+      </div>
+    </div>
+    <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="display: flex; flex-direction: column; gap: 10px;">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+        <figure style="margin: 0; background: #fff; border: 1px solid #e6ecf3; border-radius: 16px; padding: 16px 18px; box-shadow: 0 2px 10px rgba(15,40,80,.04);">
+          <div style="display: flex; align-items: center; gap: 11px;">
+            <div style="width: 34px; height: 34px; flex: none; border-radius: 50%; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 13.5px;">{{ r.initial }}</div>
+            <div style="min-width: 0; line-height: 1.25; flex: 1;">
+              <div style="font-size: 14px; font-weight: 800; color: #14243a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">{{ r.name }}</div>
+              <div style="font-size: 11.5px; color: #6b7c92; font-weight: 600;">{{ r.short }}</div>
+            </div>
+            <div style="color: #e6a817; font-size: 11px; letter-spacing: 1px; flex: none;">★★★★★</div>
+          </div>
+          <blockquote style="margin: 12px 0 0; font-size: 14.5px; line-height: 1.6; color: #33445a; text-wrap: pretty;">{{ r.text }}</blockquote>
+        </figure>
+      </sc-for>
+    </div>
+    </sc-if>
+    <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 270px), 1fr)); gap: 16px;">
+      <sc-for list="{{ reviews }}" as="r" hint-placeholder-count="3">
+        <figure style="margin: 0; background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: 28px; display: flex; flex-direction: column; gap: 16px; text-align: {{ ta }}; box-shadow: 0 2px 10px rgba(15,40,80,.04); transition: transform .3s cubic-bezier(.2,.7,.3,1), box-shadow .3s ease, border-color .3s ease;" style-hover="transform: translateY(-5px); box-shadow: 0 20px 40px rgba(15,40,80,.13); border-color: #cfdcec;">
+          <div style="color: #e6a817; font-size: 15px; letter-spacing: 2px;">★★★★★</div>
+          <blockquote style="margin: 0; font-size: 16px; line-height: 1.65; color: #33445a; text-wrap: pretty;">{{ r.text }}</blockquote>
+          <figcaption style="margin-top: auto; display: flex; align-items: center; gap: 12px; padding-top: 6px; justify-content: {{ fx }}; text-align: left;">
+            <div style="width: 38px; height: 38px; border-radius: 50%; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-weight: 800; font-size: 14px;">{{ r.initial }}</div>
+            <div style="line-height: 1.3;">
+              <div style="font-size: 14.5px; font-weight: 700;">{{ r.name }}</div>
+              <div style="font-size: 12.5px; color: #6b7c92; font-weight: 600;">{{ r.meta }}</div>
+            </div>
+          </figcaption>
+        </figure>
+      </sc-for>
+    </div>
+    </sc-if>
+    <div style="margin: 22px 0 0; display: flex; align-items: center; gap: 12px; flex-wrap: wrap; justify-content: {{ fx }};">
+      <span style="font-size: 13.5px; color: #6b7c92; font-weight: 600;">Recenzije sa Google mapa</span>
+      <a href="https://www.google.com/maps/place/MIRKO+KIROPRAKTIKA/@44.7557198,20.5673687,17z" target="_blank" rel="noopener" style="font-size: 13.5px; font-weight: 700;">Pročitaj sve na Google-u →</a>
+    </div>
+  </section>
+  </sc-if>
+
+  <section id="pitanja" style="max-width: 1160px; margin: 0 auto; padding: clamp(52px, 8vw, 86px) clamp(16px, 4vw, 24px) 0;">
+    <div style="display: grid; grid-template-columns: {{ faqCols }}; gap: clamp(24px, 3vw, 40px); align-items: {{ faqAlign }};">
+      <div style="position: {{ faqSticky }}; top: 96px; background: #fff; border: 1px solid #e6ecf3; border-radius: 18px; padding: clamp(22px, 3vw, 28px); box-shadow: 0 2px 10px rgba(15,40,80,.04);">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1b64c8; margin-bottom: 10px;">Česta pitanja</div>
+        <h2 style="margin: 0 0 12px; font-size: clamp(24px, 2.4vw, 30px); line-height: 1.14; letter-spacing: -.03em; font-weight: 800;">Pitanja koja svi postave</h2>
+        <p style="margin: 0 0 18px; font-size: 15.5px; line-height: 1.6; color: #4b5c72; text-wrap: pretty;">Ako nešto nije jasno, najbrže je da pozovete — Mirko odgovara lično.</p>
+        <div style="display: flex; align-items: center; gap: 10px; margin-bottom: 18px; padding-top: 16px; border-top: 1px solid #eef2f7; font-size: 13.5px; font-weight: 700; color: #52657e;"><span style="width: 7px; height: 7px; border-radius: 50%; background: #2aa46a; flex: none;"></span>Pon–Sub · 9–17h · odgovaramo lično</div>
+        <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 10px; background: #eaf1fa; color: #1b64c8; border: 1px solid #d3e0f1; padding: 14px 20px; border-radius: 12px; font-weight: 800; font-size: 15.5px; width: 100%; justify-content: center; transition: background .22s ease, border-color .22s ease, transform .18s cubic-bezier(.2,.7,.3,1);" style-hover="background: #1b64c8; border-color: #1b64c8; color: #fff; transform: translateY(-2px);" style-active="transform: translateY(0) scale(.97);">☎ {{ phone }}</a>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 12px; min-width: 0;">
+        <sc-for list="{{ faqs }}" as="f" hint-placeholder-count="5">
+          <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 14px; overflow: hidden; transition: border-color .25s ease, box-shadow .25s ease;" style-hover="border-color: #cfdcec; box-shadow: 0 10px 24px rgba(15,40,80,.08);">
+            <button onClick="{{ f.toggle }}" style="width: 100%; display: flex; align-items: center; gap: 16px; text-align: left; background: none; border: 0; padding: 20px 22px; cursor: pointer; font-family: inherit; font-size: 16.5px; font-weight: 700; color: #14243a; letter-spacing: -.015em; transition: background .2s ease, color .2s ease;" style-hover="background: #f5f8fc; color: #1b64c8;" style-active="background: #eaf1fa;">
+              <span style="flex: 1;">{{ f.q }}</span>
+              <span style="color: #1b64c8; font-size: 26px; font-weight: 400; line-height: .8; transition: transform .3s cubic-bezier(.2,.7,.3,1); transform: rotate({{ f.rotate }});">+</span>
+            </button>
+            <sc-if value="{{ f.open }}" hint-placeholder-val="{{ false }}">
+              <div style="padding: 0 22px 22px; font-size: 15.5px; line-height: 1.7; color: #52657e; text-wrap: pretty; animation: faqIn .32s cubic-bezier(.2,.7,.3,1) both;">{{ f.a }}</div>
+            </sc-if>
+          </div>
+        </sc-for>
+      </div>
+    </div>
+  </section>
+
+  <section id="kontakt" style="max-width: 1160px; margin: 0 auto; padding: clamp(52px, 8vw, 86px) clamp(16px, 4vw, 24px) 0;">
+    <div style="background: #fff; border: 1px solid #e6ecf3; border-radius: 24px; overflow: hidden; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); box-shadow: 0 8px 30px rgba(15,40,80,.06);">
+      <div style="padding: clamp(28px, 4vw, 48px); min-width: 0; text-align: {{ ta }};">
+        <div style="font-size: 12px; font-weight: 800; letter-spacing: .14em; text-transform: uppercase; color: #1b64c8; margin-bottom: 12px;">Gde se nalazimo</div>
+        <h2 style="margin: 0 0 26px; font-size: clamp(25px, 3vw, 34px); line-height: 1.14; letter-spacing: -.03em; font-weight: 800;">Karađorđeva 6, Kaluđerica</h2>
+        <div style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: flex; gap: 14px; align-items: center; justify-content: {{ fx }}; text-align: left;">
+            <div style="width: 38px; height: 38px; flex: none; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-size: 16px;">☎</div>
+            <div><div style="font-size: 12.5px; font-weight: 700; color: #6b7c92; margin-bottom: 3px;">Telefon</div><a href="{{ telHref }}" style="font-size: 19px; font-weight: 800; letter-spacing: -.02em;">{{ phone }}</a></div>
+          </div>
+          <div style="background: #f5f8fc; border: 1px solid #dde7f2; border-radius: 16px; padding: clamp(16px, 4vw, 22px) clamp(16px, 4vw, 24px); text-align: left;">
+            <div style="display: flex; align-items: center; gap: 12px; margin-bottom: 16px;">
+              <div style="width: 34px; height: 34px; flex: none; border-radius: 10px; background: #1b64c8; color: #fff; display: grid; place-items: center; font-size: 15px;">◷</div>
+              <div style="font-size: 12px; font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: #1b64c8;">Radno vreme</div>
+              <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><div style="margin-left: auto; display: inline-flex; align-items: center; gap: 7px; background: #e7f6ee; color: #1d7a4f; border-radius: 999px; padding: 5px 11px; font-size: 11.5px; font-weight: 800; white-space: nowrap;"><span style="width: 6px; height: 6px; border-radius: 50%; background: #2aa46a;"></span>6 dana u nedelji</div></sc-if>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: nowrap; padding: 11px 0; border-top: 1px solid #e4ebf4;">
+              <span style="font-size: clamp(13.5px, 3.6vw, 15px); font-weight: 700; color: #14243a; white-space: nowrap;">{{ dMonFri }}</span>
+              <span style="font-size: clamp(14px, 3.8vw, 16px); font-weight: 800; color: #1b64c8; font-variant-numeric: tabular-nums; letter-spacing: -.01em; white-space: nowrap;">09:00 – 17:00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: nowrap; padding: 11px 0; border-top: 1px solid #e4ebf4;">
+              <span style="font-size: clamp(13.5px, 3.6vw, 15px); font-weight: 700; color: #14243a; white-space: nowrap;">Subota</span>
+              <span style="font-size: clamp(14px, 3.8vw, 16px); font-weight: 800; color: #1b64c8; font-variant-numeric: tabular-nums; letter-spacing: -.01em; white-space: nowrap;">09:00 – 17:00</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 10px; flex-wrap: nowrap; padding: 11px 0 0; border-top: 1px solid #e4ebf4;">
+              <span style="font-size: clamp(13.5px, 3.6vw, 15px); font-weight: 700; color: #8492a6; white-space: nowrap;">Nedelja</span>
+              <span style="font-size: clamp(13px, 3.4vw, 14px); font-weight: 800; color: #8492a6; letter-spacing: .02em; white-space: nowrap;">Zatvoreno</span>
+            </div>
+          </div>
+          <div style="display: flex; gap: 14px; align-items: center; justify-content: {{ fx }}; text-align: left;">
+            <div style="width: 38px; height: 38px; flex: none; border-radius: 11px; background: #eaf1fa; color: #1b64c8; display: grid; place-items: center; font-size: 16px;">⚲</div>
+            <div><div style="font-size: 12.5px; font-weight: 700; color: #6b7c92; margin-bottom: 3px;">Adresa</div><div style="font-size: 16px; font-weight: 700; color: #14243a; line-height: 1.5;">Karađorđeva 6, Kaluđerica<br /><a href="https://www.google.com/maps/place/MIRKO+KIROPRAKTIKA/@44.7557198,20.5673687,17z" target="_blank" rel="noopener" style="font-size: 14.5px; font-weight: 700;">Otvori u Google mapama →</a></div></div>
+          </div>
+        </div>
+      </div>
+      <div style="min-width: 0; min-height: 330px; position: relative; background: #e7edf4;">
+        <iframe src="https://maps.google.com/maps?q=MIRKO+KIROPRAKTIKA,+Kara%C4%91or%C4%91eva+6,+Kalu%C4%91erica&amp;ll=44.7557198,20.5673687&amp;z=16&amp;output=embed" title="Mirko Kiropraktika — Karađorđeva 6, Kaluđerica" loading="lazy" referrerpolicy="no-referrer-when-downgrade" style="position: absolute; inset: 0; width: 100%; height: 100%; min-height: 330px; border: 0; display: block; filter: saturate(.92);"></iframe>
+        <a href="https://www.google.com/maps/place/MIRKO+KIROPRAKTIKA/@44.7557198,20.5673687,17z" target="_blank" rel="noopener" style="position: absolute; bottom: 16px; left: 16px; display: inline-flex; align-items: center; gap: 8px; background: #fff; color: #0e2a52; padding: 11px 16px; border-radius: 10px; font-size: 13.5px; font-weight: 800; box-shadow: 0 8px 22px rgba(15,40,80,.18); transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease;" style-hover="transform: translateY(-2px); box-shadow: 0 14px 30px rgba(15,40,80,.26);" style-active="transform: translateY(0) scale(.97);">⚲ Uputstvo do ordinacije</a>
+      </div>
+    </div>
+  </section>
+
+  <section style="max-width: 1160px; margin: 0 auto; padding: 76px 24px;">
+    <div style="background: linear-gradient(140deg,#12386e,#0a1f3f); border-radius: 24px; padding: clamp(34px, 5vw, 60px); text-align: center; color: #fff;">
+      <h2 style="margin: 0 auto 14px; font-size: clamp(26px, 3.6vw, 40px); line-height: 1.12; letter-spacing: -.03em; font-weight: 800; max-width: 22ch; text-wrap: balance;">Bol ne mora da bude svakodnevica</h2>
+      <p style="margin: 0 auto 30px; font-size: 17px; line-height: 1.6; color: #c5d8f0; max-width: 50ch;">Pozovite i opišite šta vas boli — dobićete iskren savet i termin koji vam odgovara.</p>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; gap: 12px; background: #fff; color: #0e2a52; padding: 18px 30px; border-radius: 13px; font-weight: 800; font-size: 18px; transition: transform .18s cubic-bezier(.2,.7,.3,1), box-shadow .25s ease, background .22s ease;" style-hover="background: #eaf1fa; transform: translateY(-3px); box-shadow: 0 16px 34px rgba(0,0,0,.28);" style-active="transform: translateY(0) scale(.97);">☎ {{ phone }}</a>
+    </div>
+  </section>
+
+  <footer style="border-top: 1px solid #e4e9ef; background: #fff;">
+    <div style="max-width: 1160px; margin: 0 auto; padding: 30px clamp(16px, 4vw, 24px); display: flex; flex-wrap: wrap; gap: 14px 28px; align-items: center; justify-content: {{ fx }}; font-size: 13.5px; color: #6b7c92; font-weight: 600;">
+      <div style="font-weight: 800; color: #14243a;">{{ clinicName }}</div>
+      <div>Karađorđeva 6, Kaluđerica, Beograd</div>
+      <div><a href="{{ telHref }}">{{ phone }}</a></div>
+      <div style="margin-left: auto;">Pon–Sub 9–17h</div>
+    </div>
+  </footer>
+
+  <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+    <div style="height: 86px;"></div>
+    <div style="position: fixed; left: 0; right: 0; bottom: 0; z-index: 60; background: rgba(255,255,255,.96); backdrop-filter: blur(10px); border-top: 1px solid #e0e7f0; padding: 12px 16px calc(12px + env(safe-area-inset-bottom)); display: flex; gap: 10px; align-items: center; box-shadow: 0 -8px 24px rgba(15,40,80,.08);">
+      <div style="flex: 1; min-width: 0; line-height: 1.25;">
+        <div style="font-size: 12px; font-weight: 700; color: #6b7c92;">Pon–Sub · 9–17h</div>
+        <div style="font-size: 15px; font-weight: 800; color: #14243a; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Karađorđeva 6, Kaluđerica</div>
+      </div>
+      <a href="https://www.google.com/maps/place/MIRKO+KIROPRAKTIKA/@44.7557198,20.5673687,17z" target="_blank" rel="noopener" aria-label="Mapa" style="display: grid; place-items: center; width: 52px; height: 52px; flex: none; border-radius: 13px; background: #f1f5fa; border: 1px solid #dde6f1; color: #1b64c8; font-size: 20px; transition: background .2s ease;" style-active="background: #e2ebf7;">⚲</a>
+      <a href="{{ telHref }}" style="display: inline-flex; align-items: center; justify-content: center; gap: 9px; flex: none; min-height: 52px; padding: 0 22px; border-radius: 13px; background: #1b64c8; color: #fff; font-weight: 800; font-size: 16px; box-shadow: 0 10px 24px rgba(27,100,200,.3); transition: transform .16s cubic-bezier(.2,.7,.3,1), background .2s ease;" style-active="transform: scale(.96); background: #12508f;">☎ Pozovi</a>
+    </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;clinicName&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;Mirko Kiropraktika&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;phone&quot;:{&quot;editor&quot;:&quot;text&quot;,&quot;default&quot;:&quot;063 8093 888&quot;,&quot;tsType&quot;:&quot;string&quot;},&quot;showReviews&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Sekcije&quot;}}">
+class Component extends DCLogic {
+  state = { open: -1, w: typeof window !== "undefined" ? window.innerWidth : 1200, menu: false };
+
+  slowScrollTo(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    const hdr = document.querySelector("[data-header]");
+    const off = hdr ? hdr.getBoundingClientRect().height + 14 : 0;
+    const start = window.pageYOffset;
+    const target = el.getBoundingClientRect().top + start - off;
+    const dist = target - start;
+    const dur = Math.min(800, Math.max(380, Math.abs(dist) * 0.4));
+    const t0 = performance.now();
+    this._navScroll = true;
+    const step = (now) => {
+      const p = Math.min(1, (now - t0) / dur);
+      const e = p < 0.5 ? 4 * p * p * p : 1 - Math.pow(-2 * p + 2, 3) / 2;
+      window.scrollTo(0, start + dist * e);
+      if (p < 1) requestAnimationFrame(step);
+      else this._navScroll = false;
+    };
+    requestAnimationFrame(step);
+  }
+
+  componentDidMount() {
+    document.querySelectorAll('[style*="opacity: 0"]').forEach((el) => {
+      if (el.closest("section")) { el.style.opacity = ""; el.style.animation = ""; el.style.animationDelay = ""; }
+    });
+    const measure = () => {
+      const el = document.getElementById("dc-root") || document.body;
+      const w = Math.min(el.clientWidth || 9999, window.innerWidth || 9999);
+      if (w && w !== this.state.w) this.setState({ w });
+    };
+    measure();
+    this._onResize = measure;
+    window.addEventListener("resize", this._onResize);
+    this._onScroll = () => {
+      if (this.state.menu && !this._navScroll) this.setState({ menu: false });
+    };
+    window.addEventListener("scroll", this._onScroll, { passive: true });
+    this._onDocDown = (e) => {
+      if (!this.state.menu) return;
+      if (e.target.closest && e.target.closest("[data-header]")) return;
+      this.setState({ menu: false });
+    };
+    document.addEventListener("pointerdown", this._onDocDown, true);
+    if (typeof ResizeObserver === "function") {
+      this._ro = new ResizeObserver(measure);
+      this._ro.observe(document.getElementById("dc-root") || document.body);
+    }
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("resize", this._onResize);
+    window.removeEventListener("scroll", this._onScroll);
+    document.removeEventListener("pointerdown", this._onDocDown, true);
+    if (this._ro) this._ro.disconnect();
+  }
+
+  renderVals() {
+    const phone = this.props.phone ?? "063 8093 888";
+    const faqSrc = [
+      ["Da li je terapija bolna?", "Većina ljudi oseti olakšanje već posle prve terapije. Neprijatnost je moguća na osetljivim mestima, ali se radi u granicama koje vi diktirate — sve se objašnjava unapred."],
+      ["Koliko poseta mi je potrebno?", "Zavisi od toga koliko dugo traje problem. Posle prvog pregleda dobijate realnu procenu — kod akutnih tegoba često je dovoljno 2–4 posete, kod hroničnih se radi u serijama."],
+      ["Treba li mi snimak ili nalaz lekara?", "Nije obavezno, ali ako imate snimak, magnetnu rezonancu ili nalaz specijaliste — donesite ih. Pomažu da se brže dođe do uzroka."],
+      ["Radite li sa sportistima?", "Da. Rad sa povređenim sportistima je veliki deo Mirkove prakse — od akutnih povreda do vraćanja u trening posle pauze."],
+      ["Kako se zakazuje termin?", "Telefonom, na " + phone + ". Mirko se javlja lično i dogovarate termin u okviru radnog vremena (pon–sub, 9–17h)."],
+      ["Da li mogu da dođem bez zakazivanja?", "Bolje je pozvati pre dolaska da ne biste čekali. Ako je slobodno, termin se često nađe istog dana."]
+    ];
+    const isMobile = this.state.w < 820;
+    return {
+      clinicName: this.props.clinicName ?? "Mirko Kiropraktika",
+      phone,
+      isMobile,
+      isDesktop: !isMobile,
+      menuOpen: this.state.menu,
+      toggleMenu: () => this.setState(s => ({ menu: !s.menu })),
+      closeMenu: () => this.setState({ menu: false }),
+      headingWrap: isMobile ? "normal" : "nowrap",
+      headerWrap: isMobile ? "nowrap" : "wrap",
+      ta: isMobile ? "center" : "left",
+      fx: isMobile ? "center" : "flex-start",
+      mx: isMobile ? "0 auto" : "0",
+      dMonFri: isMobile ? "Pon – Pet" : "Ponedeljak – Petak",
+      statCols: isMobile ? "1fr" : "repeat(3, 1fr)",
+      faqCols: isMobile ? "1fr" : "minmax(260px, 320px) 1fr",
+      faqSticky: "static",
+      faqAlign: isMobile ? "start" : "center",
+      headerPos: isMobile ? "fixed" : "sticky",
+      headerPadTop: isMobile ? "calc(34px + env(safe-area-inset-top))" : "12px",
+      navTo: ["poseta", "o-mirku", "iskustva", "pitanja", "kontakt"].reduce((acc, id) => {
+        acc[id.replace("-", "_")] = (e) => { if (e && e.preventDefault) e.preventDefault(); this.slowScrollTo(id); };
+        return acc;
+      }, {}),
+      menuItems: [["poseta", "Prva poseta"], ["o-mirku", "O Mirku"], ["iskustva", "Iskustva"], ["pitanja", "Česta pitanja"], ["kontakt", "Kontakt i mapa"]].map(([id, label]) => ({
+        label,
+        go: () => {
+          this.setState({ menu: false });
+          const el = document.getElementById(id);
+          if (!el) return;
+          const hdr = document.querySelector("[data-header]");
+          const off = hdr ? hdr.getBoundingClientRect().height + 10 : 0;
+          const top = el.getBoundingClientRect().top + window.pageYOffset - off;
+          window.scrollTo({ top, behavior: "smooth" });
+        }
+      })),
+      telHref: "tel:+381" + phone.replace(/\D/g, "").replace(/^0/, ""),
+      showReviews: this.props.showReviews ?? true,
+      reviews: [
+        { text: "Sve pohvale za Mirka, brzo i efikasno uklanjanje bolova!", name: "BB RALLY", short: "Google · pre 3 godine", initial: "B", meta: "Google recenzija · pre 3 godine" },
+        { text: "Upornom terapijom i bol se uspešno smanjuju.", name: "Stone Flesh", short: "Google · pre 3 godine", initial: "S", meta: "Google recenzija · pre 3 godine" },
+        { text: "Najbolje, sve preporuke.", name: "Emilija Samardžić", short: "Google · pre 3 godine", initial: "E", meta: "Google recenzija · pre 3 godine" }
+      ],
+      faqs: faqSrc.map((f, i) => ({
+        q: f[0], a: f[1],
+        open: this.state.open === i,
+        rotate: this.state.open === i ? "45deg" : "0deg",
+        toggle: () => this.setState(s => ({ open: s.open === i ? -1 : i }))
+      }))
+    };
+  }
+}
+
+</script>
+</body>
+</html>
